@@ -22,8 +22,7 @@ body {
 }
 
 .page-header,
-.pet-game,
-.devtools-lab {
+.pet-game {
   max-width: 920px;
   margin-inline: auto;
 }
@@ -207,32 +206,6 @@ h1 {
   background: #fff1df;
   color: #5a361e;
   font-size: 0.9rem;
-}
-
-.devtools-lab {
-  margin-top: 18px;
-  padding: 14px 16px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--surface);
-}
-
-.devtools-lab summary {
-  width: fit-content;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.devtools-buttons {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin: 12px 0;
-}
-
-.nap-bug-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
 }
 
 @media (max-width: 700px) {

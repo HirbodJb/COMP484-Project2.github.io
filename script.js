@@ -8,11 +8,6 @@ $(function() {
     $('.play-button').click(clickedPlayButton);
     $('.exercise-button').click(clickedExerciseButton);
     $('.nap-button').click(clickedNapButton);
-
-    document.querySelector('#demo-logs').addEventListener('click', logMangoStats);
-    document.querySelector('#demo-404').addEventListener('click', requestMissingImage);
-    document.querySelector('#demo-typeerror').addEventListener('click', triggerTypeError);
-    document.querySelector('#demo-violation').addEventListener('click', triggerSlowClick);
   
 
   
@@ -45,17 +40,7 @@ $(function() {
     }
 
     function clickedNapButton() {
-      const energyBefore = pet_info.energy;
-      const recovery = 3;
-      const reproduceNapBug = document.querySelector('#reproduce-nap-bug').checked;
-      // I keep the wrong sign available for the breakpoint demo. Normal naps restore energy.
-      const energyChange = reproduceNapBug ? -recovery : recovery;
-
-      // I use the correct sign for the nap energy change in the normal game.
-      //const energyChange = recovery;
-
-      applyPetAction(this, { weight: 0, happiness: 1, energy: energyChange });
-      console.info(`[Mango nap] Energy ${energyBefore} → ${pet_info.energy}`);
+      applyPetAction(this, { weight: 0, happiness: 1, energy: 3 });
 
       // I float the nap text up and fade it out after about a second.
       const rise = reducedMotion.matches ? 'translateY(0)' : 'translateY(-18px)';
@@ -64,43 +49,6 @@ $(function() {
         { opacity: 1, offset: 0.55 },
         { opacity: 0, transform: rise }
       ], { duration: 1000, easing: 'ease-out' });
-    }
-
-    function logMangoStats() {
-      console.info('[Mango audit] Pet dashboard is ready.');
-      console.warn('[Mango audit] Demo warning: check Mango’s energy before play.');
-      console.error('[Mango audit] Demo error: Mango’s toy inventory could not load.');
-
-      console.group('Mango snapshot');
-      console.table([
-        { stat: 'Weight', value: pet_info.weight, unit: 'lb' },
-        { stat: 'Happiness', value: pet_info.happiness, unit: 'wags/min' },
-        { stat: 'Energy', value: pet_info.energy, unit: 'points' }
-      ]);
-      console.log('%cMango status check complete', 'color: #fff; background: #9a411b; font-weight: bold; padding: 2px 6px');
-      console.groupEnd();
-
-      console.info('[Mango audit] End of dashboard snapshot.');
-    }
-
-    function requestMissingImage() {
-      // I request a nonexistent file so the HTTP server produces a real 404.
-      const image = new Image();
-      image.src = 'images/hw10-missing-mango-toy.png';
-    }
-
-    function triggerTypeError() {
-      const missingToy = undefined;
-      // I leave this exception uncaught so Chrome reports the TypeError and its stack.
-      return missingToy.name;
-    }
-
-    function triggerSlowClick() {
-      // I block this demo click briefly so Chrome can report a long-running handler.
-      const end = performance.now() + 350;
-      while (performance.now() < end) {
-        // Keep the main thread busy until the demo interval ends.
-      }
     }
 
     function applyPetAction(button, changes) {
@@ -191,3 +139,4 @@ $(function() {
           : 'Mango the orange tabby kitten';
       }
     }
+  
